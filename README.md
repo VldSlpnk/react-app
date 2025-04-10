@@ -1,6 +1,6 @@
 Клонуйте репозиторій:
 
-git clone https://github.com/your-username/your-repository-name.git
+git clone https://github.com/VldSlpnk/react-app
 
 Встановіть залежності командою:
 
