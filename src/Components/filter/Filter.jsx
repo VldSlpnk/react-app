@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './Filter.module.css'
+import styles from './Filter.module.scss'
 
 const Filter = ({ categories, products, onFilterChange }) => {
   const [selectedCategory, setSelectedCategory] = useState('all')

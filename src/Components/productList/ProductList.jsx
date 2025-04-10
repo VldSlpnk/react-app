@@ -1,8 +1,10 @@
+// src/components/productList/ProductList.jsx
 import React, { useEffect, useState } from 'react'
-import styles from './ProductList.module.css'
+import styles from './ProductList.module.scss'
 import Card from '../card/Card'
 import Pagination from '../pagination/Pagination'
 import Filter from '../filter/Filter'
+import Loader from '../loader/Loader'
 
 const ProductList = () => {
   const [products, setProducts] = useState([])
@@ -48,16 +50,13 @@ const ProductList = () => {
   return (
     <div>
       <h1>Список товарів</h1>
-
       <Filter
         categories={categories}
         products={products}
         onFilterChange={handleFilterChange}
       />
-
-      {loading && <div className={styles.loader}>Завантаження...</div>}
+      {loading && <Loader />}
       {error && <p className={styles.error}>{error}</p>}
-
       <div className={styles.productsGrid}>
         {filteredProducts
           .slice(
@@ -68,7 +67,6 @@ const ProductList = () => {
             <Card key={product.id} product={product} />
           ))}
       </div>
-
       <Pagination
         filteredProducts={filteredProducts}
         productsPerPage={productsPerPage}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import styles from './Pagination.module.css'
+import styles from './Pagination.module.scss'
 
 const Pagination = ({
   filteredProducts,
