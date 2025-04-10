@@ -1,13 +1,13 @@
-# Клонуйте репозиторій:
+Клонуйте репозиторій:
 
-git clone https://github.com/VldSlpnk/react-app
+# git clone https://github.com/VldSlpnk/react-app
 
-# Встановіть залежності командою:
+Встановіть залежності командою:
 
-npm install
+# npm install
 
-# Запустіть додаток:
+Запустіть додаток:
 
-npm run start
+# npm run start
 
 # react-app
