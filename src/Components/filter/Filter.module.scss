@@ -1,27 +1,10 @@
+$active-bg: #007bff;
+
 .filterButtons {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
   margin-bottom: 20px;
 }
-
-.filterButton {
-  margin: 3px;
-    background-color: #0089be;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-}
-
-.filterButton.active {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.filterButton:hover {
-  background-color: #3e32f1;
-}
-

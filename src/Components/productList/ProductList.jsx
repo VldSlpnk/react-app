@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import styles from './ProductList.module.scss'
-import Card from '../card/Card'
-import Pagination from '../pagination/Pagination'
+import React, { useState, useEffect, useContext } from 'react'
+import { CartContext } from '../../context/CartContext'
+import Header from '../header/Header'
+import ProductGrid from '../productGrid/ProductGrid'
 import Filter from '../filter/Filter'
-import Loader from '../loader/Loader'
+import Pagination from '../pagination/Pagination'
 import Cart from '../cart/Cart'
+import Loader from '../loader/Loader'
+import styles from './ProductList.module.scss'
 
 const ProductList = () => {
   const [products, setProducts] = useState([])
@@ -12,17 +14,11 @@ const ProductList = () => {
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [productsPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem('cartItems')
-    return savedCart ? JSON.parse(savedCart) : []
-  })
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const productsPerPage = 10
 
-  useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems))
-  }, [cartItems])
+  const { addToCart } = useContext(CartContext)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,17 +28,12 @@ const ProductList = () => {
         setProducts(data)
         setFilteredProducts(data)
       } catch (err) {
-        console.error('Помилка при завантаженні товарів:', err)
         setError('Помилка при завантаженні товарів')
       } finally {
         setLoading(false)
       }
     }
 
-    fetchProducts()
-  }, [])
-
-  useEffect(() => {
     const fetchCategories = async () => {
       try {
         const res = await fetch('https://fakestoreapi.com/products/categories')
@@ -53,51 +44,38 @@ const ProductList = () => {
       }
     }
 
+    fetchProducts()
     fetchCategories()
   }, [])
 
-  const handleFilterChange = (filteredProducts) => {
-    setFilteredProducts(filteredProducts)
+  const handleFilterChange = (filtered) => {
+    setFilteredProducts(filtered)
     setCurrentPage(1)
   }
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber)
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+  }
+
+  const handleToggleCart = () => {
+    setIsCartOpen(!isCartOpen)
   }
 
   const handleAddToCart = (product) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id)
-      if (existingItem) {
-        return prevItems.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      } else {
-        return [...prevItems, { ...product, quantity: 1 }]
-      }
-    })
+    addToCart(product)
     setIsCartOpen(true)
   }
 
-  const handleCloseCart = () => {
-    setIsCartOpen(false)
-  }
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  )
 
   return (
-    <div>
-      <h1>Список товарів</h1>
-      <button
-        className={styles.cartOpen}
-        onClick={() => setIsCartOpen(!isCartOpen)}
-      >
-        {isCartOpen ? 'Закрити кошик' : 'Відкрити кошик'}
-      </button>
-
+    <div className={styles.container}>
+      <Header onToggleCart={handleToggleCart} isCartOpen={isCartOpen} />
       {loading && <Loader />}
       {error && <p className={styles.error}>{error}</p>}
-
       {!loading && !error && (
         <>
           <Filter
@@ -105,39 +83,23 @@ const ProductList = () => {
             products={products}
             onFilterChange={handleFilterChange}
           />
-
-          {filteredProducts.length === 0 && (
+          {filteredProducts.length === 0 ? (
             <p className={styles.empty}>Товарів не знайдено</p>
+          ) : (
+            <>
+              <ProductGrid
+                products={paginatedProducts}
+                onAddToCart={handleAddToCart}
+              />
+              <Pagination
+                filteredProducts={filteredProducts}
+                productsPerPage={productsPerPage}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+              />
+            </>
           )}
-
-          <div className={styles.productsGrid}>
-            {filteredProducts
-              .slice(
-                (currentPage - 1) * productsPerPage,
-                currentPage * productsPerPage
-              )
-              .map((product) => (
-                <Card
-                  key={product.id}
-                  product={product}
-                  onAddToCart={handleAddToCart}
-                />
-              ))}
-          </div>
-
-          <Pagination
-            filteredProducts={filteredProducts}
-            productsPerPage={productsPerPage}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
-
-          <Cart
-            isOpen={isCartOpen}
-            cartItems={cartItems}
-            setCartItems={setCartItems}
-            onClose={handleCloseCart}
-          />
+          <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
         </>
       )}
     </div>

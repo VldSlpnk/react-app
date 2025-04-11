@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Button from '../button/Button'
 import styles from './Filter.module.scss'
 
 const Filter = ({ categories, products, onFilterChange }) => {
@@ -6,31 +7,23 @@ const Filter = ({ categories, products, onFilterChange }) => {
 
   const handleFilterChange = (category) => {
     setSelectedCategory(category)
-
-    let filteredProducts
-    if (category === 'all') {
-      filteredProducts = products
-    } else {
-      filteredProducts = products.filter(
-        (product) => product.category === category
-      )
-    }
-
+    const filteredProducts =
+      category === 'all'
+        ? products
+        : products.filter((product) => product.category === category)
     onFilterChange(filteredProducts)
   }
 
   return (
     <div className={styles.filterButtons}>
       {categories.map((category) => (
-        <button
+        <Button
           key={category}
-          className={`${styles.filterButton} ${
-            selectedCategory === category ? styles.active : ''
-          }`}
+          variant={selectedCategory === category ? 'active' : 'primary'}
           onClick={() => handleFilterChange(category)}
         >
           {category}
-        </button>
+        </Button>
       ))}
     </div>
   )

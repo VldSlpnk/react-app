@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../button/Button'
 import styles from './Pagination.module.scss'
 
 const Pagination = ({
@@ -16,35 +17,31 @@ const Pagination = ({
 
   return (
     <div className={styles.pagination}>
-      <button
-        className={styles.pageButton}
+      <Button
+        variant="primary"
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
         Попередня
-      </button>
-
+      </Button>
       {Array.from({ length: totalPages }, (_, index) => index + 1).map(
         (page) => (
-          <button
+          <Button
             key={page}
-            className={`${styles.pageButton} ${
-              currentPage === page ? styles.active : ''
-            }`}
+            variant={currentPage === page ? 'active' : 'primary'}
             onClick={() => handlePageChange(page)}
           >
             {page}
-          </button>
+          </Button>
         )
       )}
-
-      <button
-        className={styles.pageButton}
+      <Button
+        variant="primary"
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
         Наступна
-      </button>
+      </Button>
     </div>
   )
 }

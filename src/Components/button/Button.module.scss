@@ -1,0 +1,49 @@
+$primary-bg: #0089be;
+$primary-hover-bg: #3e32f1;
+$danger-bg: #e74c3c;
+$danger-hover-bg: #c0392b;
+$secondary-bg: #999;
+$secondary-hover-bg: #777;
+$disabled-bg: #ddd;
+
+.button {
+margin: 3px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &.primary {
+    background-color: $primary-bg;
+    color: white;
+
+    &:hover {
+      background-color: $primary-hover-bg;
+    }
+  }
+
+  &.danger {
+    background-color: $danger-bg;
+    color: white;
+
+    &:hover {
+      background-color: $danger-hover-bg;
+    }
+  }
+
+  &.secondary {
+    background-color: $secondary-bg;
+    color: white;
+
+    &:hover {
+      background-color: $secondary-hover-bg;
+    }
+  }
+
+  &:disabled {
+    background-color: $disabled-bg;
+    cursor: not-allowed;
+  }
+}

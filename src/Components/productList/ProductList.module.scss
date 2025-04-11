@@ -1,45 +1,17 @@
-.productsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.error {
+  text-align: center;
+  color: #e74c3c;
   padding: 20px;
 }
 
-.filterButtons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 10px 20px;
-}
-
-.filterButton {
-  padding: 8px 16px;
-  border: none;
-  background: #eeeeee;
-  cursor: pointer;
-  border-radius: 8px;
-  text-transform: capitalize;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: #cccccc;
-  }
-
-  &.active {
-    background: #007bff;
-    color: white;
-  }
-}
-
-
-.cartOpen {
-  background-color: #0089be;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-  
+.empty {
+  text-align: center;
+  color: #333;
+  padding: 20px;
 }

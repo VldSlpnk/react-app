@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../button/Button'
 import styles from './Card.module.scss'
 
 const Card = ({ product, onAddToCart }) => {
@@ -13,9 +14,7 @@ const Card = ({ product, onAddToCart }) => {
         </h3>
         <p className={styles.category}>{category}</p>
         <p className={styles.price}>${price.toFixed(2)}</p>
-        <button className={styles.button} onClick={() => onAddToCart(product)}>
-          Додати до кошика
-        </button>
+        <Button onClick={() => onAddToCart(product)}>Додати до кошика</Button>
       </div>
     </div>
   )

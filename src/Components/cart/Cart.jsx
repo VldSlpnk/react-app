@@ -1,18 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CartContext } from '../../context/CartContext'
+import Button from '../button/Button'
 import styles from './Cart.module.scss'
 
-const Cart = ({ isOpen, cartItems = [], setCartItems, onClose }) => {
-  const removeFromCart = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id))
-  }
+const Cart = ({ isOpen, onClose }) => {
+  const { cartItems, removeFromCart, clearCart } = useContext(CartContext)
 
-  const clearCart = () => {
-    setCartItems([])
-  }
-
-  const total = Array.isArray(cartItems)
-    ? cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
-    : 0
+  const total = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+    0
+  )
 
   const handleCartClick = (e) => {
     if (e.target.classList.contains(styles.cartDrawer)) {
@@ -36,16 +34,19 @@ const Cart = ({ isOpen, cartItems = [], setCartItems, onClose }) => {
                 <span>{item.title}</span>
                 <span>× {item.quantity}</span>
                 <span>${(item.price * item.quantity).toFixed(2)}</span>
-                <button onClick={() => removeFromCart(item.id)}>
+                <Button
+                  variant="danger"
+                  onClick={() => removeFromCart(item.id)}
+                >
                   Видалити
-                </button>
+                </Button>
               </li>
             ))}
           </ul>
           <div className={styles.cartTotal}>Загалом: ${total.toFixed(2)}</div>
-          <button className={styles.clearBtn} onClick={clearCart}>
+          <Button variant="secondary" onClick={clearCart}>
             Очистити кошик
-          </button>
+          </Button>
         </>
       )}
     </div>

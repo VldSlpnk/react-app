@@ -1,39 +1,33 @@
 $primary-bg: #fff;
 $shadow-color: rgba(0, 0, 0, 0.1);
 $border-color: #eee;
-$remove-btn-bg: #e74c3c;
-$remove-btn-hover-bg: #c0392b;
-$clear-btn-bg: #999;
-$clear-btn-hover-bg: #777;
 $text-color: #333;
 $cart-width: 320px;
-$cart-mobile-width: 100%;
 $mobile-breakpoint: 768px;
 $small-breakpoint: 480px;
 
 .cartDrawer {
   position: fixed;
   top: 0;
-  right: -100%; 
+  right: -100%;
   width: $cart-width;
   height: 100%;
   background-color: $primary-bg;
-  box-shadow: none; 
   padding: 20px;
   transition: right 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   z-index: 999;
   overflow-y: auto;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 
   &.open {
     right: 0;
-    box-shadow: -2px 0 8px $shadow-color; 
+    box-shadow: -2px 0 8px $shadow-color;
   }
 
   .cartList {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 20px 0;
 
     .cartItem {
       display: flex;
@@ -47,22 +41,6 @@ $small-breakpoint: 480px;
         color: $text-color;
         font-size: 1rem;
       }
-
-      button {
-        margin-top: auto;
-        padding: 10px;
-        border: none;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        background-color: $remove-btn-bg;
-        color: $primary-bg;
-        transition: background-color 0.2s ease;
-
-        &:hover {
-          background-color: $remove-btn-hover-bg;
-        }
-      }
     }
   }
 
@@ -73,25 +51,8 @@ $small-breakpoint: 480px;
     color: $text-color;
   }
 
-  .clearBtn {
-    margin-top: auto;
-        padding: 10px;
-        border: none;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        cursor: pointer;
-    color: $primary-bg;
-    background-color: $clear-btn-bg;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: $clear-btn-hover-bg;
-    }
-  }
-
   @media (max-width: $mobile-breakpoint) {
-    width: $cart-mobile-width;
-    right: -100vw; 
+    width: 100%;
     padding: 15px;
 
     &.open {
@@ -103,21 +64,11 @@ $small-breakpoint: 480px;
         span {
           font-size: 0.95rem;
         }
-
-        button {
-          font-size: 0.85rem;
-          padding: 3px 6px;
-        }
       }
     }
 
     .cartTotal {
       font-size: 1rem;
-    }
-
-    .clearBtn {
-      padding: 6px 10px;
-      font-size: 0.95rem;
     }
   }
 
@@ -132,22 +83,12 @@ $small-breakpoint: 480px;
         span {
           font-size: 0.9rem;
         }
-
-        button {
-          font-size: 0.8rem;
-          padding: 2px 5px;
-        }
       }
     }
 
     .cartTotal {
       font-size: 0.95rem;
       margin-top: 12px;
-    }
-
-    .clearBtn {
-      padding: 5px 8px;
-      font-size: 0.9rem;
     }
   }
 }

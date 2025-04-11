@@ -1,12 +1,11 @@
 import React from 'react'
 import ProductList from './Components/productList/ProductList'
+import { CartProvider } from './context/CartContext'
 
-function App() {
-  return (
-    <div className="App">
-      <ProductList />
-    </div>
-  )
-}
+const App = () => (
+  <CartProvider>
+    <ProductList />
+  </CartProvider>
+)
 
 export default App
