@@ -30,3 +30,16 @@
     color: white;
   }
 }
+
+
+.cartOpen {
+  background-color: #0089be;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  
+}

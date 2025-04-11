@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './Pagination.module.scss'
 
 const Pagination = ({
@@ -13,10 +13,6 @@ const Pagination = ({
     if (page < 1 || page > totalPages) return
     onPageChange(page)
   }
-
-  useEffect(() => {
-    onPageChange(currentPage)
-  }, [currentPage, filteredProducts, productsPerPage, onPageChange])
 
   return (
     <div className={styles.pagination}>

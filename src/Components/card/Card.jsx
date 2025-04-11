@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Card.module.scss'
 
-const Card = ({ product }) => {
+const Card = ({ product, onAddToCart }) => {
   const { image, title, price, category } = product
 
   return (
@@ -12,8 +12,10 @@ const Card = ({ product }) => {
           {title}
         </h3>
         <p className={styles.category}>{category}</p>
-        <p className={styles.price}>${price}</p>
-        <button className={styles.button}>Додати до кошика</button>
+        <p className={styles.price}>${price.toFixed(2)}</p>
+        <button className={styles.button} onClick={() => onAddToCart(product)}>
+          Додати до кошика
+        </button>
       </div>
     </div>
   )

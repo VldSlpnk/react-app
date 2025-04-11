@@ -7,10 +7,14 @@
 .pageButton {
   padding: 10px 15px;
   margin: 0 5px;
+  background-color: #0089be;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
   cursor: pointer;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  transition: background-color 0.3s;
 }
 
 .pageButton:hover {
